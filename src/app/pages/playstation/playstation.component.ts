@@ -7,7 +7,7 @@ import { CarrinhoService } from '../../services/carrinho.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-pc',
+  selector: 'app-playstation',
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './playstation.component.html',
@@ -20,7 +20,7 @@ export class PlaystationComponent implements OnInit {
   setaEsquerda = ChevronLeft;
   setaDireita = ChevronRight;
   
-  // Lista de jogos para PC
+  // Lista de jogos
   jogos: any[] = [];
 
   // Variáveis de paginação
@@ -38,27 +38,28 @@ export class PlaystationComponent implements OnInit {
   ) {} 
 
   ngOnInit(): void {
-    this.buscarJogosPC();
+    this.buscarJogosPS(); 
   }
 
-  buscarJogosPC() {
-    // Filtra apenas jogos de PC
-    this.gameService.listar(this.paginaAtual, this.tamanhoDaPagina, 'PC').subscribe({
+  buscarJogosPS() {
+    this.gameService.listar(this.paginaAtual, this.tamanhoDaPagina, 'PS5').subscribe({
       next: (dados: any) => {
-        // Se a API retornar array direto (sem paginação)
+        
         if (Array.isArray(dados)) {
           this.jogos = [...this.jogos, ...dados];
-          this.eUltimaPagina = true; // Se não tem paginação, é a última página
+          this.eUltimaPagina = true; 
         } else {
-          // Se retornar com paginação Spring
+          // Lógica de paginação do Spring
           this.jogos = [...this.jogos, ...dados.content];
           this.totalPaginas = dados.totalPages;
           this.ePrimeiraPagina = dados.first;
           this.eUltimaPagina = dados.last;
         }
+        
+        console.log('Jogos de PS5 carregados:', this.jogos); // Debug
       }, 
       error: (erro: any) => {
-        console.error('Erro ao carregar os jogos de PC: ', erro);
+        console.error('Erro ao carregar os jogos de PlayStation: ', erro);
       }
     });
   }
@@ -66,29 +67,24 @@ export class PlaystationComponent implements OnInit {
   carregarMais() {
     if (!this.eUltimaPagina) {
       this.paginaAtual++;
-      this.buscarJogosPC();
+      this.buscarJogosPS(); 
     }
   }
 
   // MÉTODO PARA ADICIONAR AO CARRINHO
   adicionarAoCarrinho(jogo: any) {
     
-    // 1. Verificação de segurança
     if (!this.authService.estaLogado()) {
       alert('Você precisa fazer login para comprar!');
       this.router.navigate(['/login']);
       return;
     }
 
-    // 2. Monta o objeto para o carrinho
     const itemDTO = {
       jogoId: jogo.id, 
       quantidade: 1
     };
 
-    console.log('Enviando para o carrinho:', itemDTO);
-
-    // 3. Chama o serviço
     this.carrinhoService.adicionarAoCarrinho(itemDTO).subscribe({
       next: () => {
         alert(`"${jogo.nome}" adicionado ao carrinho!`); 

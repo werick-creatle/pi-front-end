@@ -7,18 +7,23 @@ import { XboxComponent } from './pages/xbox/xbox.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { LoginComponent } from './pages/login/login.component';
+import { PedidoSucessoComponent } from './components/pedido-sucesso/pedido-sucesso.component';
+
+// --- ÁREA ADMIN ---
 import { AdminComponent } from './pages/admin/admin.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { CadastrarJogosComponent } from './pages/admin/cadastrar-jogos/cadastrar-jogos.component';
+import { ListarJogosComponent } from './pages/admin/listar-jogos/listar-jogos.component';
+import { EditarJogoComponent } from './pages/admin/editar-jogo/editar-jogo.component'; 
+
 import { RemoverJogosComponent } from './pages/admin/remover-jogos/remover-jogos.component';
 
-// --- 1. IMPORTAÇÃO NOVA AQUI ---
-import { PedidoSucessoComponent } from './components/pedido-sucesso/pedido-sucesso.component';
+
 
 export const routes: Routes = [
     {
         path: 'lancamentos',
-        component: LancamentosComponent,
+        component: LancamentosComponent, 
     },
     {
         path: 'catalogo',
@@ -41,8 +46,7 @@ export const routes: Routes = [
         component: CarrinhoComponent,
     },
     
-    // --- 2. ROTA NOVA AQUI ---
-    // O ":id" é fundamental para aceitar o número do pedido (ex: /pedido-sucesso/13)
+    // Rota de Sucesso do Pedido
     {
         path: 'pedido-sucesso/:id',
         component: PedidoSucessoComponent,
@@ -57,19 +61,28 @@ export const routes: Routes = [
         component: LoginComponent,
     },
 
-    // ADMIN 
+    // --- ROTAS DO ADMIN ---
     {
         path: 'admin',
-        component: AdminComponent,
+        component: AdminComponent, 
         children: [ 
             {
                 path: 'dashboard',
-                component: DashboardComponent,
+                component: DashboardComponent, 
             },
             {
                 path: 'cadastrar-jogos',
                 component: CadastrarJogosComponent,
             },
+            {
+                path: 'jogos',
+                component: ListarJogosComponent, 
+            },
+            {
+                path: 'editar-jogo/:id', 
+                component: EditarJogoComponent,
+            },
+           
             {
                 path: 'remover-jogos',
                 component: RemoverJogosComponent,
@@ -82,7 +95,7 @@ export const routes: Routes = [
         ],
     },
 
-    //Primeira tela ao abrir o site
+    // Rota padrão (Home)
     {
         path: '',
         redirectTo: 'lancamentos',

@@ -1,60 +1,98 @@
 <div class="form-page-container">
   <h2>🎮 Cadastrar Novo Jogo</h2>
   
-  <form class="game-form">
+  <form class="game-form" (ngSubmit)="onSubmit()" #form="ngForm">
     
     <div class="form-group large-input">
       <label for="nome">Nome do Jogo:</label>
-      <input type="text" id="nome" placeholder="Ex: God of War Ragnarok" required>
+      <input type="text" id="nome" 
+             name="nome" 
+             [(ngModel)]="jogo.nome" 
+             placeholder="Digite o nome do jogo" required>
     </div>
     
     <div class="form-row three-cols">
       <div class="form-group">
         <label for="plataforma">Plataforma:</label>
-        <select id="plataforma" required>
-          <option value="" disabled selected>Selecione a plataforma</option>
-          <option value="ps">PlayStation</option>
-          <option value="xbox">Xbox</option>
-          <option value="pc">PC</option>
-          <option value="nintendo">Nintendo</option>
+        <select id="plataforma" 
+                name="plataforma" 
+                [(ngModel)]="jogo.plataforma" 
+                required>
+          <option value="" disabled selected>Selecione...</option>
+          <option value="PS5">PlayStation</option>
+          <option value="XBOX">Xbox Series</option>
+          <option value="PC">PC / Windows</option>
+          <option value="NINTENDO">Nintendo Switch</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="genero">Gênero:</label>
-        <input type="text" id="genero" placeholder="Ex: RPG, Ação" required>
+        <select id="genero" 
+                name="genero" 
+                [(ngModel)]="jogo.genero" 
+                required>
+          <option value="" disabled selected>Selecione...</option>
+          <option value="Ação">Ação</option>
+          <option value="Aventura">Aventura</option>
+          <option value="RPG">RPG</option>
+          <option value="FPS">FPS (Tiro)</option>
+          <option value="Esporte">Esporte</option>
+          <option value="Corrida">Corrida</option>
+          <option value="Estratégia">Estratégia</option>
+          <option value="Terror">Terror</option>
+          <option value="Luta">Luta</option>
+          <option value="Simulação">Simulação</option>
+        </select>
       </div>
       
       <div class="form-group">
         <label for="data-lancamento">Data de Lançamento:</label>
-        <input type="date" id="data-lancamento" required>
+        <input type="date" id="data-lancamento" 
+               name="dataLancamento" 
+               [(ngModel)]="jogo.dataLancamento" 
+               required>
       </div>
     </div>
     
     <div class="form-row three-cols">
       <div class="form-group">
         <label for="preco">Preço (R$):</label>
-        <input type="number" id="preco" placeholder="Ex: 199.90" step="0.01" required>
+        <input type="number" id="preco" 
+               name="preco" 
+               [(ngModel)]="jogo.preco" 
+               placeholder="0,00" step="0.01" required>
       </div>
       
       <div class="form-group">
         <label for="quantidade-estoque">Estoque Inicial:</label>
-        <input type="number" id="quantidade-estoque" placeholder="Ex: 50" required>
+        <input type="number" id="quantidade-estoque" 
+               name="quantidadeEstoque" 
+               [(ngModel)]="jogo.quantidadeEstoque" 
+               placeholder="0" required>
       </div>
 
       <div class="form-group">
         <label for="url-imagem">URL da Imagem:</label>
-        <input type="url" id="url-imagem" placeholder="https://exemplo.com/capa.jpg" required>
+        <input type="url" id="url-imagem" 
+               name="urlImagemCapa" 
+               [(ngModel)]="jogo.urlImagemCapa" 
+               placeholder="https://..." required>
       </div>
     </div>
     
     <div class="form-group large-input">
       <label for="descricao">Descrição:</label>
-      <textarea id="descricao" rows="4" placeholder="Breve descrição do jogo..." required></textarea>
+      <textarea id="descricao" rows="4" 
+                name="descricao" 
+                [(ngModel)]="jogo.descricao" 
+                placeholder="Digite a descrição do jogo..." required></textarea>
     </div>
     
     <div class="form-action">
-      <button type="submit" class="btn btn-primary">Cadastrar Jogo</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        Cadastrar Jogo
+      </button>
     </div>
     
   </form>

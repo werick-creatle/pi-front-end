@@ -1,0 +1,182 @@
+/* Container Geral */
+.list-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cabeçalho (Título + Botão Novo) */
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 15px;
+}
+
+h2 {
+  color: #a855f7; /* Roxo claro */
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+/* Botão "Novo Jogo" */
+.btn-new {
+  background: linear-gradient(45deg, #7c3aed, #a855f7); /* Degradê Roxo */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-new:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+  background: linear-gradient(45deg, #6d28d9, #9333ea);
+}
+
+/* Container da Tabela (Card) */
+.table-wrapper {
+  background-color: #1e1e1e; /* Fundo Cinza Escuro */
+  border-radius: 12px;
+  overflow: hidden; /* Arredonda os cantos da tabela */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid #333;
+}
+
+/* A Tabela em si */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+/* Cabeçalho da Tabela */
+.custom-table thead tr {
+  background-color: #2c2c2c;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.custom-table th {
+  padding: 18px 15px;
+  color: #a0a0a0;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Linhas do Corpo */
+.custom-table td {
+  padding: 15px;
+  border-bottom: 1px solid #333;
+  vertical-align: middle; /* Centraliza verticalmente */
+  color: #e0e0e0;
+}
+
+/* Efeito Zebrado ou Hover nas linhas */
+.custom-table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #252525; /* Leve destaque ao passar o mouse */
+}
+
+/* Imagem de Capa (Thumb) */
+.thumb-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #444;
+}
+
+/* Badge de Plataforma */
+.badge-plataforma {
+  background-color: #333;
+  color: #ccc;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  border: 1px solid #444;
+  white-space: nowrap;
+}
+
+/* Preço */
+td:nth-child(5) { /* Coluna do Preço */
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: #4ade80; /* Verde matrix para dinheiro */
+}
+
+/* Estoque Baixo */
+.low-stock {
+  color: #ef4444; /* Vermelho alerta */
+  font-weight: bold;
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Ações (Botões Editar/Excluir) */
+.actions-cell {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-action {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px;
+  border-radius: 5px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-action:hover {
+  transform: scale(1.15);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.edit {
+  color: #60a5fa; /* Azul claro */
+}
+
+.delete {
+  color: #f87171; /* Vermelho claro */
+}
+
+/* Estado Vazio (Sem jogos) */
+.empty-state {
+  padding: 60px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+  .table-wrapper {
+    overflow-x: auto; /* Permite rolar para o lado no celular */
+  }
+  
+  .header-flex {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

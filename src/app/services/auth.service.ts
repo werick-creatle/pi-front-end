@@ -2,14 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
+import { RegistroDTO } from '../models/registro-dto';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly API = 'http://localhost:8080/api/auth/login';
+ private readonly BASE_URL = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) { }
+
+
+
+  //Metodo cadastrar
+cadastrar(dados: RegistroDTO): Observable<string> {
+    return this.http.post(
+      `${this.BASE_URL}/register`, 
+      dados, 
+      { responseType: 'text' }
+    );
+  }
+
+
+
+
 
   // 1. Método de Login
   logar(dados: any): Observable<any> {
@@ -21,7 +39,7 @@ export class AuthService {
       withCredentials: true // Importante para o Cookie
     };
 
-    return this.http.post<any>(this.API, dados, httpOptions).pipe(
+    return this.http.post<any>(`${this.BASE_URL}/login`, dados, httpOptions).pipe(
       tap((resposta) => {
         if (resposta) {
           localStorage.setItem('usuario_logado', JSON.stringify(resposta));

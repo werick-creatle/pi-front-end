@@ -7,7 +7,7 @@ import { CarrinhoService } from '../../services/carrinho.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-pc',
+  selector: 'app-xbox', // <--- CORRIGIDO
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './xbox.component.html',
@@ -20,7 +20,7 @@ export class XboxComponent implements OnInit {
   setaEsquerda = ChevronLeft;
   setaDireita = ChevronRight;
   
-  // Lista de jogos para PC
+  // Lista de jogos
   jogos: any[] = [];
 
   // Variáveis de paginação
@@ -38,17 +38,18 @@ export class XboxComponent implements OnInit {
   ) {} 
 
   ngOnInit(): void {
-    this.buscarJogosPC();
+    this.buscarJogosXbox(); // <--- CORRIGIDO
   }
 
-  buscarJogosPC() {
-    // Filtra apenas jogos de PC
-    this.gameService.listar(this.paginaAtual, this.tamanhoDaPagina, 'PC').subscribe({
+  buscarJogosXbox() { // <--- CORRIGIDO
+    // Filtra apenas jogos de XBOX
+    // (Certifique-se que no Admin você salvou como 'XBOX' maiúsculo)
+    this.gameService.listar(this.paginaAtual, this.tamanhoDaPagina, 'XBOX').subscribe({
       next: (dados: any) => {
         // Se a API retornar array direto (sem paginação)
         if (Array.isArray(dados)) {
           this.jogos = [...this.jogos, ...dados];
-          this.eUltimaPagina = true; // Se não tem paginação, é a última página
+          this.eUltimaPagina = true; 
         } else {
           // Se retornar com paginação Spring
           this.jogos = [...this.jogos, ...dados.content];
@@ -56,9 +57,10 @@ export class XboxComponent implements OnInit {
           this.ePrimeiraPagina = dados.first;
           this.eUltimaPagina = dados.last;
         }
+        console.log('Jogos de Xbox carregados:', this.jogos);
       }, 
       error: (erro: any) => {
-        console.error('Erro ao carregar os jogos de PC: ', erro);
+        console.error('Erro ao carregar os jogos de Xbox: ', erro);
       }
     });
   }
@@ -66,7 +68,7 @@ export class XboxComponent implements OnInit {
   carregarMais() {
     if (!this.eUltimaPagina) {
       this.paginaAtual++;
-      this.buscarJogosPC();
+      this.buscarJogosXbox(); // <--- CORRIGIDO
     }
   }
 
