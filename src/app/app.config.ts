@@ -2,7 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection, LOCALE_ID } from '@angul
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authInterceptor } from './services/auth.interceptor';
+import { authInterceptor } from './interceptors/auth.interceptor';
 
 // --- 1. Importações para o Português ---
 import { registerLocaleData } from '@angular/common';
